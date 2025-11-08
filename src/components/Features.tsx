@@ -60,12 +60,13 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative p-8 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 hover:-translate-y-2 animate-fadeIn"
+              className="group relative p-8 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 hover:-translate-y-2 animate-scaleIn cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-20 blur transition-all duration-500"></div>
 
-              <div className={`relative z-10 inline-flex p-4 bg-gradient-to-br ${feature.gradient} rounded-xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+              <div className={`relative z-10 inline-flex p-4 bg-gradient-to-br ${feature.gradient} rounded-xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg`}>
                 <div className="text-white">
                   {feature.icon}
                 </div>

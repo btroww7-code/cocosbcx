@@ -1,4 +1,5 @@
-import { PieChart, TrendingUp, Lock, Users } from 'lucide-react';
+import { PieChart as PieChartIcon, TrendingUp, Lock, Users } from 'lucide-react';
+import PieChart from './PieChart';
 
 export default function Tokenomics() {
   const distribution = [
@@ -11,7 +12,7 @@ export default function Tokenomics() {
   ];
 
   const metrics = [
-    { icon: <PieChart className="w-6 h-6" />, label: 'Total Supply', value: '1,000,000,000' },
+    { icon: <PieChartIcon className="w-6 h-6" />, label: 'Total Supply', value: '1,000,000,000' },
     { icon: <TrendingUp className="w-6 h-6" />, label: 'Circulating Supply', value: '300,000,000' },
     { icon: <Lock className="w-6 h-6" />, label: 'Locked Tokens', value: '700,000,000' },
     { icon: <Users className="w-6 h-6" />, label: 'Token Holders', value: '125,000+' }
@@ -53,40 +54,7 @@ export default function Tokenomics() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="relative w-full aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse-slow"></div>
-
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
-                {distribution.map((item, index) => {
-                  const prevPercentages = distribution.slice(0, index).reduce((sum, d) => sum + d.percentage, 0);
-                  const startAngle = (prevPercentages / 100) * 360;
-                  const angle = (item.percentage / 100) * 360;
-                  const largeArc = angle > 180 ? 1 : 0;
-
-                  const startX = 100 + 80 * Math.cos((startAngle * Math.PI) / 180);
-                  const startY = 100 + 80 * Math.sin((startAngle * Math.PI) / 180);
-                  const endX = 100 + 80 * Math.cos(((startAngle + angle) * Math.PI) / 180);
-                  const endY = 100 + 80 * Math.sin(((startAngle + angle) * Math.PI) / 180);
-
-                  return (
-                    <g key={index}>
-                      <path
-                        d={`M 100 100 L ${startX} ${startY} A 80 80 0 ${largeArc} 1 ${endX} ${endY} Z`}
-                        className={`fill-current bg-gradient-to-br ${item.color} opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-pointer`}
-                        style={{
-                          filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.3))'
-                        }}
-                      />
-                    </g>
-                  );
-                })}
-                <circle cx="100" cy="100" r="50" className="fill-slate-900" />
-                <text x="100" y="95" textAnchor="middle" className="text-2xl font-bold fill-cyan-400">COCOS</text>
-                <text x="100" y="110" textAnchor="middle" className="text-xs fill-gray-400">1B Total</text>
-              </svg>
-            </div>
-          </div>
+          <PieChart distribution={distribution} />
 
           <div className="space-y-4">
             {distribution.map((item, index) => (

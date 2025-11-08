@@ -21,12 +21,13 @@ export default function Hero() {
         }}
       />
 
-      <div className="absolute top-1/4 -right-64 w-[600px] h-[600px] bg-cyan-500 rounded-full opacity-10 blur-3xl animate-pulse-slow"></div>
-      <div className="absolute bottom-1/4 -left-64 w-[600px] h-[600px] bg-blue-500 rounded-full opacity-10 blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/4 -right-64 w-[600px] h-[600px] bg-cyan-500 rounded-full opacity-10 blur-3xl animate-pulse-slow animate-float"></div>
+      <div className="absolute bottom-1/4 -left-64 w-[600px] h-[600px] bg-blue-500 rounded-full opacity-10 blur-3xl animate-pulse-slow animate-float" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full mb-8 backdrop-blur-sm animate-fadeIn">
-          <Sparkles className="w-4 h-4 text-cyan-400" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full mb-8 backdrop-blur-sm animate-fadeIn hover:bg-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 cursor-pointer group">
+          <Sparkles className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
           <span className="text-sm text-cyan-300 font-medium">Revolutionary Blockchain Gaming Token</span>
         </div>
 
@@ -45,17 +46,19 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slideUp" style={{ animationDelay: '0.4s' }}>
-          <button className="group relative px-8 py-4 font-bold text-lg text-white overflow-hidden rounded-xl transition-all duration-300 hover:scale-105">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 animate-gradient-shift"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10 flex items-center gap-2">
-              Explore Ecosystem
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </span>
-          </button>
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-xl opacity-75 group-hover:opacity-100 blur group-hover:blur-md transition-all duration-300 animate-gradient-shift"></div>
+            <button className="relative px-8 py-4 font-bold text-lg text-white bg-slate-950 rounded-xl transition-all duration-300 hover:scale-105">
+              <span className="flex items-center gap-2">
+                Explore Ecosystem
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+            </button>
+          </div>
 
-          <button className="group px-8 py-4 font-bold text-lg text-cyan-400 border-2 border-cyan-500/50 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-            <span className="flex items-center gap-2">
+          <button className="group relative px-8 py-4 font-bold text-lg text-cyan-400 border-2 border-cyan-500/50 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-400 transition-all duration-300 hover:scale-105 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-400/10 to-cyan-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            <span className="relative flex items-center gap-2">
               Read Whitepaper
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
@@ -71,7 +74,7 @@ export default function Hero() {
           ].map((stat, index) => (
             <div
               key={index}
-              className="group relative p-6 bg-slate-900/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 animate-fadeIn"
+              className="group relative p-6 bg-slate-900/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 animate-scaleIn cursor-pointer"
               style={{ animationDelay: `${0.5 + index * 0.1}s` }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
