@@ -9,6 +9,7 @@ import Tokenomics from './components/Tokenomics';
 import Ecosystem from './components/Ecosystem';
 import Roadmap from './components/Roadmap';
 import Community from './components/Community';
+import Staking from './components/Staking';
 import Footer from './components/Footer';
 import ParticlesBackground from './components/ParticlesBackground';
 
@@ -31,6 +32,7 @@ function App() {
           <Ecosystem />
           <Roadmap />
           <Community />
+          <Staking />
           <Footer />
         </div>
       </QueryClientProvider>

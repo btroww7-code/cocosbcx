@@ -22,14 +22,14 @@ export default function ParticlesBackground() {
       opacity: number;
     }> = [];
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 150; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2,
-        opacity: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        radius: Math.random() * 2.5 + 0.5,
+        opacity: Math.random() * 0.6 + 0.4,
       });
     }
 
@@ -47,7 +47,14 @@ export default function ParticlesBackground() {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(56, 189, 248, ${particle.opacity})`;
+        const gradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.radius * 2
+        );
+        gradient.addColorStop(0, `rgba(6, 182, 212, ${particle.opacity})`);
+        gradient.addColorStop(0.5, `rgba(56, 189, 248, ${particle.opacity * 0.8})`);
+        gradient.addColorStop(1, `rgba(56, 189, 248, 0)`);
+        ctx.fillStyle = gradient;
         ctx.fill();
 
         particles.forEach((particle2, j) => {
@@ -56,12 +63,13 @@ export default function ParticlesBackground() {
           const dy = particle.y - particle2.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 120) {
+          if (distance < 150) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particle2.x, particle2.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - distance / 120)})`;
-            ctx.lineWidth = 0.5;
+            const lineOpacity = 0.4 * (1 - distance / 150);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${lineOpacity})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         });
@@ -88,7 +96,7 @@ export default function ParticlesBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.4 }}
+      style={{ opacity: 0.7 }}
     />
   );
 }

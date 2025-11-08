@@ -1,39 +1,39 @@
-import { Zap, Shield, Gamepad2, Coins, Users, TrendingUp } from 'lucide-react';
+import { Zap, Shield, Gamepad2, Coins, Users, TrendingUp, Gauge, Lock, Rocket, DollarSign, Globe2, BarChart3 } from 'lucide-react';
 
 export default function Features() {
   const features = [
     {
-      icon: <Zap className="w-8 h-8" />,
+      icon: <Gauge className="w-10 h-10" />,
       title: "Lightning Fast",
       description: "Process thousands of transactions per second with sub-second finality for seamless gaming experiences.",
       gradient: "from-yellow-400 to-orange-500"
     },
     {
-      icon: <Shield className="w-8 h-8" />,
+      icon: <Lock className="w-10 h-10" />,
       title: "Enterprise Security",
       description: "Military-grade encryption and multi-signature protocols protect your assets 24/7.",
       gradient: "from-green-400 to-emerald-500"
     },
     {
-      icon: <Gamepad2 className="w-8 h-8" />,
+      icon: <Rocket className="w-10 h-10" />,
       title: "Gaming Optimized",
       description: "Built specifically for gaming with NFT support, in-game assets, and cross-game compatibility.",
       gradient: "from-purple-400 to-pink-500"
     },
     {
-      icon: <Coins className="w-8 h-8" />,
+      icon: <DollarSign className="w-10 h-10" />,
       title: "Low Transaction Fees",
       description: "Minimal gas fees ensure maximum value for players and developers in every transaction.",
       gradient: "from-cyan-400 to-blue-500"
     },
     {
-      icon: <Users className="w-8 h-8" />,
+      icon: <Globe2 className="w-10 h-10" />,
       title: "Vibrant Community",
       description: "Join a thriving ecosystem of gamers, developers, and investors building the future together.",
       gradient: "from-red-400 to-rose-500"
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
+      icon: <BarChart3 className="w-10 h-10" />,
       title: "Proven Growth",
       description: "Consistent ecosystem expansion with new partnerships and integrations every month.",
       gradient: "from-blue-400 to-indigo-500"

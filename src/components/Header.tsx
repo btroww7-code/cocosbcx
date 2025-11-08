@@ -1,10 +1,11 @@
-import { Menu, X, Wallet } from 'lucide-react';
+import { Menu, X, Wallet, ChevronDown, Send } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showWallets, setShowWallets] = useState(false);
   const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
@@ -21,8 +22,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-slate-950/70 backdrop-blur-xl border-b border-cyan-500/20 shadow-lg shadow-cyan-500/10'
-          : 'bg-slate-950/30 backdrop-blur-md'
+          ? 'bg-slate-950/40 backdrop-blur-2xl border-b border-cyan-500/20 shadow-lg shadow-cyan-500/10'
+          : 'bg-slate-950/20 backdrop-blur-xl'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +45,7 @@ export default function Header() {
           </div>
 
           <nav className="hidden md:flex space-x-1">
-            {['Home', 'Features', 'Tokenomics', 'Ecosystem', 'Roadmap', 'Community'].map((item) => (
+            {['Home', 'Features', 'Tokenomics', 'Ecosystem', 'Roadmap', 'Community', 'Staking'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -58,15 +59,52 @@ export default function Header() {
           </nav>
 
           {!isConnected ? (
-            <div className="hidden md:block relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-xl opacity-75 group-hover:opacity-100 blur transition-all duration-300"></div>
-              <button
-                onClick={() => connectors[0] && connect({ connector: connectors[0] })}
-                className="relative px-6 py-3 font-semibold text-white bg-slate-950 rounded-xl flex items-center gap-2 transition-all duration-300"
-              >
-                <Wallet className="w-5 h-5" />
-                <span>Connect Wallet</span>
-              </button>
+            <div className="hidden md:block relative">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-xl opacity-75 group-hover:opacity-100 blur transition-all duration-300"></div>
+                <button
+                  onClick={() => setShowWallets(!showWallets)}
+                  className="relative px-6 py-3 font-semibold text-white bg-slate-950 rounded-xl flex items-center gap-2 transition-all duration-300"
+                >
+                  <Wallet className="w-5 h-5" />
+                  <span>Connect</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showWallets ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+
+              {showWallets && (
+                <div className="absolute top-full mt-2 right-0 w-80 bg-slate-900/95 backdrop-blur-xl border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-500/20 p-4 animate-fadeIn">
+                  <div className="space-y-2">
+                    {connectors.map((connector) => (
+                      <button
+                        key={connector.id}
+                        onClick={() => {
+                          connect({ connector });
+                          setShowWallets(false);
+                        }}
+                        className="w-full px-4 py-3 text-left text-white hover:bg-cyan-500/10 rounded-xl transition-all duration-300 flex items-center gap-3 border border-slate-800 hover:border-cyan-500/50 group"
+                      >
+                        <div className="p-2 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                          <Wallet className="w-5 h-5 text-white" />
+                        </div>
+                        <span className="font-medium">{connector.name}</span>
+                      </button>
+                    ))}
+                    <button
+                      onClick={() => {
+                        window.open('https://t.me/cocosbcx_bot', '_blank');
+                        setShowWallets(false);
+                      }}
+                      className="w-full px-4 py-3 text-left text-white hover:bg-cyan-500/10 rounded-xl transition-all duration-300 flex items-center gap-3 border border-slate-800 hover:border-cyan-500/50 group"
+                    >
+                      <div className="p-2 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                        <Send className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="font-medium">Telegram Login</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-4">
@@ -95,7 +133,7 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden animate-fadeIn">
             <div className="px-2 pt-2 pb-6 space-y-2 bg-slate-900/95 backdrop-blur-xl border-t border-cyan-500/20 rounded-b-2xl">
-              {['Home', 'Features', 'Tokenomics', 'Ecosystem', 'Roadmap', 'Community'].map((item) => (
+              {['Home', 'Features', 'Tokenomics', 'Ecosystem', 'Roadmap', 'Community', 'Staking'].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -106,13 +144,32 @@ export default function Header() {
                 </a>
               ))}
               {!isConnected ? (
-                <button
-                  onClick={() => connectors[0] && connect({ connector: connectors[0] })}
-                  className="w-full mt-4 px-6 py-3 font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
-                >
-                  <Wallet className="w-5 h-5" />
-                  Connect Wallet
-                </button>
+                <div className="space-y-2 mt-4">
+                  <div className="text-sm text-gray-400 px-4 mb-2">Connect Wallet:</div>
+                  {connectors.map((connector) => (
+                    <button
+                      key={connector.id}
+                      onClick={() => {
+                        connect({ connector });
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full px-6 py-3 font-semibold text-white bg-slate-800 hover:bg-cyan-500/20 rounded-xl transition-all duration-300 flex items-center gap-3 border border-slate-700 hover:border-cyan-500/50"
+                    >
+                      <Wallet className="w-5 h-5 text-cyan-400" />
+                      {connector.name}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => {
+                      window.open('https://t.me/cocosbcx_bot', '_blank');
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full px-6 py-3 font-semibold text-white bg-slate-800 hover:bg-cyan-500/20 rounded-xl transition-all duration-300 flex items-center gap-3 border border-slate-700 hover:border-cyan-500/50"
+                  >
+                    <Send className="w-5 h-5 text-cyan-400" />
+                    Telegram Login
+                  </button>
+                </div>
               ) : (
                 <button
                   onClick={() => disconnect()}
