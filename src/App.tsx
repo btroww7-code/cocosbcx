@@ -1,18 +1,29 @@
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Contact from './components/Contact';
+import Features from './components/Features';
+import Tokenomics from './components/Tokenomics';
+import Ecosystem from './components/Ecosystem';
+import Roadmap from './components/Roadmap';
+import Community from './components/Community';
 import Footer from './components/Footer';
+import ParticlesBackground from './components/ParticlesBackground';
 
 function App() {
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, []);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
+      <ParticlesBackground />
       <Header />
       <Hero />
-      <About />
-      <Services />
-      <Contact />
+      <Features />
+      <Tokenomics />
+      <Ecosystem />
+      <Roadmap />
+      <Community />
       <Footer />
     </div>
   );
